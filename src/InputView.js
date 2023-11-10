@@ -8,7 +8,15 @@ const InputView = {
         '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)'
       )
     );
+    this.validateDate(date);
+
     return date;
+  },
+
+  validateDate(date) {
+    if (date < 1 || date > 31) {
+      throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
+    }
   },
 
   async readOrder() {
