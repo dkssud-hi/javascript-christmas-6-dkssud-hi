@@ -5,7 +5,6 @@ import {
   GIVEAWAY_EVENT,
   EVENT,
   WEEKDAY_EVENT,
-  WEEKEND_EVENT,
 } from '../constants/EventConstants';
 
 class EventController {
@@ -19,6 +18,7 @@ class EventController {
   }
 
   convertAmountToString(amount) {
+    //utill
     const stringAmount = String(amount);
     const insertPoint = 3;
     let countPoint = 0;
@@ -60,20 +60,35 @@ class EventController {
       return STATUS.NON_APPLICABLE;
     }
 
+    const discountAmount = this.calculateDayEventDiscountAmount(menus, [
+      ...CATEGORY_OF_MENUS.DESSERT,
+    ]);
+
+    return discountAmount;
+  }
+
+  checkWeekendDiscountEvent(date, menus) {
+    if (!WEEKDAY_EVENT.NON_APPLICABLE_DATES.includes(date)) {
+      return STATUS.NON_APPLICABLE;
+    }
+
+    const discountAmount = this.calculateDayEventDiscountAmount(menus, [
+      ...CATEGORY_OF_MENUS.DESSERT,
+    ]);
+
+    return discountAmount;
+  }
+
+  calculateDayEventDiscountAmount(menus, category) {
+    // utill
     const discountAmount = menus.reduce((acc, cur) => {
-      if (CATEGORY_OF_MENUS.DESSERT.includes(cur.name)) {
+      if (category.includes(cur.name)) {
         return (acc += EVENT.DISCOUNT);
       }
       return acc;
     }, 0);
 
     return discountAmount;
-  }
-
-  checkWeekendDiscountEvent(date, menus) {
-    if (!WEEKEND_EVENT.APPLICABLE_DATES.includes(date)) {
-      return STATUS.NON_APPLICABLE;
-    }
   }
 }
 
