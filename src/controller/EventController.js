@@ -73,7 +73,7 @@ class EventController {
     }
 
     const discountAmount = this.calculateDayEventDiscountAmount(menus, [
-      ...CATEGORY_OF_MENUS.DESSERT,
+      ...CATEGORY_OF_MENUS.MAIN,
     ]);
 
     return discountAmount;
@@ -81,11 +81,11 @@ class EventController {
 
   calculateDayEventDiscountAmount(menus, category) {
     // utill
-    const discountAmount = menus.reduce((acc, cur) => {
-      if (category.includes(cur.name)) {
-        return (acc += EVENT.DISCOUNT);
+    const discountAmount = menus.reduce((amount, menu) => {
+      if (category.includes(menu.name)) {
+        return (amount += EVENT.DISCOUNT * menu.quantity);
       }
-      return acc;
+      return amount;
     }, 0);
 
     return discountAmount;
