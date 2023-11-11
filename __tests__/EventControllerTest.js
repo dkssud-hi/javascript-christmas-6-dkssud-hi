@@ -89,4 +89,19 @@ describe('EventController 클래스 테스트', () => {
     //then
     expect(result).toEqual(expectResult);
   });
+
+  test('특별 할인 이벤트 내역을 반환하는 기능 테스트 ', () => {
+    //given
+    const expectResult = [1000, STATUS.NON_APPLICABLE];
+    const mockDate = [3, 11];
+    const controller = new EventController();
+
+    mockDate.forEach((date, idx) => {
+      //when
+      const result = controller.checkSpecialDiscountEvent(date);
+
+      //then
+      expect(result).toEqual(expectResult[idx]);
+    });
+  });
 });
