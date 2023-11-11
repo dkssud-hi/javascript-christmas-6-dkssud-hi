@@ -15,4 +15,9 @@ export const GIVEAWAY_EVENT = {
 
 export const EVENT = {
   APPLICABLE_AMOUNT: 10000,
+  DISCOUNT: 2023,
+};
+
+export const WEEKDAY_EVENT = {
+  NON_APPLICABLE_DATES: [1, 2, 8, 9, 15, 16, 22, 23, 29, 30],
 };
