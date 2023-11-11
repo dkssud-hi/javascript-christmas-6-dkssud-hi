@@ -1,4 +1,5 @@
 import { PRICE_OF_MENUS } from '../constants/MenuInfo';
+import { STATUS } from '../constants/Status';
 
 class EventController {
   calculateTotalAmountBeforeDiscount(menus) {
@@ -31,9 +32,9 @@ class EventController {
 
   CheckGiveawayEvent(amount) {
     if (amount >= 120000) {
-      return true;
+      return STATUS.APPLICABLE;
     }
-    return false;
+    return STATUS.NON_APPLICABLE;
   }
 }
 
