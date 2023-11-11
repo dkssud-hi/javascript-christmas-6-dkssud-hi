@@ -28,4 +28,19 @@ describe('EventController 클래스 테스트', () => {
     //then
     expect(result).toEqual('10,000,000,000');
   });
+
+  test('증정이벤트에 해당하는지 판별하는 기능 테스트', () => {
+    //given
+    const mockAmount = [50000, 150000];
+    const mockResult = [false, true];
+    const controller = new EventController();
+
+    //when
+
+    //then
+    mockAmount.forEach((amount, idx) => {
+      const result = controller.CheckGiveawayEvent(amount);
+      expect(result).toEqual(mockResult[idx]);
+    });
+  });
 });
