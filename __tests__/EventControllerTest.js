@@ -1,4 +1,5 @@
 import EventController from '../src/controller/EventController';
+import { STATUS } from '../src/constants/EventConstants';
 
 describe('EventController 클래스 테스트', () => {
   test('할인 전 총 주문 금액을 계산하는 기능 테스트', () => {
@@ -32,15 +33,28 @@ describe('EventController 클래스 테스트', () => {
   test('증정이벤트에 해당하는지 판별하는 기능 테스트', () => {
     //given
     const mockAmount = [50000, 150000];
-    const mockResult = [false, true];
+    const expectResult = [false, true];
     const controller = new EventController();
 
-    //when
-
-    //then
     mockAmount.forEach((amount, idx) => {
+      //when
       const result = controller.checkGiveawayEvent(amount);
-      expect(result).toEqual(mockResult[idx]);
+      //then
+      expect(result).toEqual(expectResult[idx]);
+    });
+  });
+
+  test('크리스마스 디데이 할인 내역 반환하는 기능 테스트', () => {
+    //given
+    const mockDate = [3, 26];
+    const expectResult = [1200, STATUS.NON_APPLICABLE];
+    const controller = new EventController();
+
+    mockDate.forEach((date, idx) => {
+      //when
+      const result = controller.checkChirsmasDdayEvent(date);
+      //then
+      expect(result).toEqual(expectResult[idx]);
     });
   });
 });
