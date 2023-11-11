@@ -4,6 +4,15 @@ export const STATUS = {
 };
 
 export const CHRISMAS_D_DAY = {
+  EVENT_DEADLINE: 25,
   DEFAULT_DISCOUNT: 1000,
   BONUS_DISCOUNT: 100,
+};
+
+export const GIVEAWAY_EVENT = {
+  APPLICABLE_AMOUNT: 120000,
+};
+
+export const EVENT = {
+  APPLICABLE_AMOUNT: 10000,
 };
