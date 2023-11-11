@@ -73,4 +73,20 @@ describe('EventController 클래스 테스트', () => {
     //then
     expect(result).toEqual(expectResult);
   });
+
+  test('주말이벤트 할인 내역을 반환하는 기능 테스트', () => {
+    //given
+    const expectResult = 4046;
+    const controller = new EventController();
+
+    //when
+    const result = controller.checkWeekendDiscountEvent(15, [
+      { name: '해산물파스타', quantity: '2' },
+      { name: '레드와인', quantity: '1' },
+      { name: '초코케이크', quantity: '1' },
+    ]);
+
+    //then
+    expect(result).toEqual(expectResult);
+  });
 });
