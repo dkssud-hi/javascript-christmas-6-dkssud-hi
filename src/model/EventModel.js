@@ -22,10 +22,13 @@ class EventModel {
     const summary = order
       .split(',')
       .map((el) => el.trim())
-      .map((el) => el.split('-'));
+      .map((el) => {
+        const menuInfo = el.split('-');
+        return { name: menuInfo[0], quantity: menuInfo[1] };
+      });
     /* 
      주문 정렬 형식
-     : [['메뉴1','메뉴1의 수량'],['메뉴2','메뉴2의 수량'],['메뉴3','메뉴3의 수량']]
+     : [[{name:메뉴1, quantity:주문수}],[{name:메뉴1, quantity:주문수}], ...]
      */
     return summary;
   }
