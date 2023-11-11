@@ -11,7 +11,7 @@ class EventController {
     return amount;
   }
 
-  ConvertAmountToString(amount) {
+  convertAmountToString(amount) {
     const stringAmount = String(amount);
     const insertPoint = 3;
     let countPoint = 0;
@@ -30,12 +30,14 @@ class EventController {
     return convertToArray.reverse().join('');
   }
 
-  CheckGiveawayEvent(amount) {
+  checkGiveawayEvent(amount) {
     if (amount >= 120000) {
       return STATUS.APPLICABLE;
     }
     return STATUS.NON_APPLICABLE;
   }
+
+  checkChirsmasDdayEvent() {}
 }
 
 export default EventController;

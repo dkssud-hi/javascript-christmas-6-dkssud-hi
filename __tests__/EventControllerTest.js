@@ -23,7 +23,7 @@ describe('EventController 클래스 테스트', () => {
     const controller = new EventController();
 
     //when
-    const result = controller.ConvertAmountToString(mockAmount);
+    const result = controller.convertAmountToString(mockAmount);
 
     //then
     expect(result).toEqual('10,000,000,000');
@@ -39,7 +39,7 @@ describe('EventController 클래스 테스트', () => {
 
     //then
     mockAmount.forEach((amount, idx) => {
-      const result = controller.CheckGiveawayEvent(amount);
+      const result = controller.checkGiveawayEvent(amount);
       expect(result).toEqual(mockResult[idx]);
     });
   });
