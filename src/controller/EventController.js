@@ -1,5 +1,10 @@
 import { PRICE_OF_MENUS } from '../constants/MenuInfo';
-import { STATUS, CHRISMAS_D_DAY } from '../constants/EventConstants';
+import {
+  STATUS,
+  CHRISMAS_D_DAY,
+  GIVEAWAY_EVENT,
+  EVENT,
+} from '../constants/EventConstants';
 
 class EventController {
   calculateTotalAmountBeforeDiscount(menus) {
@@ -31,14 +36,17 @@ class EventController {
   }
 
   checkGiveawayEvent(amount) {
-    if (amount >= 120000) {
+    if (amount >= GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
       return STATUS.APPLICABLE;
     }
     return STATUS.NON_APPLICABLE;
   }
 
-  checkChirsmasDdayEvent(date) {
-    if (date > 25) {
+  checkChirsmasDdayEvent(date, amount) {
+    if (
+      date > CHRISMAS_D_DAY.EVENT_DEADLINE ||
+      amount < EVENT.APPLICABLE_AMOUNT
+    ) {
       return STATUS.NON_APPLICABLE;
     }
 
@@ -47,6 +55,8 @@ class EventController {
       CHRISMAS_D_DAY.BONUS_DISCOUNT * (date - 1)
     );
   }
+
+  checkWeekdayDiscountEvent(date, menus) {}
 }
 
 export default EventController;
