@@ -23,8 +23,11 @@ class EventModel {
     const summary = mockOrder
       .split(',')
       .map((el) => el.trim())
-      .map((el = el.split('-')));
+      .map((el) => el.split('-'));
+    console.log(summary);
 
     return summary;
   }
 }
+
+export default EventModel;
