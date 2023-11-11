@@ -14,6 +14,8 @@ const OutputView = {
     Console.print('<할인 전 총주문 금액>');
     Console.print(`${amount}원`);
   },
+
+  printTotalDiscountDetail() {},
 };
 
 export default OutputView;
