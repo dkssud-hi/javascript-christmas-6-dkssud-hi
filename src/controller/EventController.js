@@ -55,16 +55,15 @@ class EventController {
   }
 
   checkWeekdayDiscountEvent(date, menus) {
-    if (WEEKDAY_EVENT.includes(date)) {
+    if (WEEKDAY_EVENT.NON_APPLICABLE_DATES.includes(date)) {
       return STATUS.NON_APPLICABLE;
     }
-    const discountAmount = [
-      { name: '해산물파스타', quantity: '2' },
-      { name: '레드와인', quantity: '1' },
-      { name: '초코케이크', quantity: '1' },
-    ].reduce((acc, cur) => {
-      if (CATEGORY_OF_MENUS.DESSERT.includese(cur.name))
+
+    const discountAmount = menus.reduce((acc, cur) => {
+      if (CATEGORY_OF_MENUS.DESSERT.includes(cur.name)) {
         return (acc += EVENT.DISCOUNT);
+      }
+      return acc;
     }, 0);
 
     return discountAmount;
