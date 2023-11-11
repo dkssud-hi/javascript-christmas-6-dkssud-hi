@@ -11,7 +11,7 @@ class EventModel {
   }
 
   setMenu(menu) {
-    this.#menu = menu;
+    this.#menu = this.summarizeOrder(menu);
   }
 
   getMenu() {
@@ -19,12 +19,10 @@ class EventModel {
   }
 
   summarizeOrder(order) {
-    const mockOrder = '해산물파스타-2,레드와인-1,초코케이크-1';
-    const summary = mockOrder
+    const summary = order
       .split(',')
       .map((el) => el.trim())
       .map((el) => el.split('-'));
-    console.log(summary);
 
     return summary;
   }
