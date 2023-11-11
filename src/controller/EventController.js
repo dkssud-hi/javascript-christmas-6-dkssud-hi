@@ -9,6 +9,24 @@ class EventController {
 
     return amount;
   }
+
+  ConvertAmountToString(amount) {
+    const insertPoint = 3;
+    let countPoint = 0;
+    const convertToArray = [];
+
+    [...amount].forEach((syllable) => {
+      convertToArray.push(syllable);
+
+      countPoint = +1;
+      if (countPoint === insertPoint) {
+        convertToArray.push(',');
+        countPoint = 0;
+      }
+    });
+
+    return String(convertToArray);
+  }
 }
 
 export default EventController;
