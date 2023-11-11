@@ -6,7 +6,8 @@ const OutputView = {
     menus.forEach((menu) => {
       Console.print(`${menu[0]} ${menu[1]}개`);
     });
-    Console.log('\n\n');
+
+    Console.print('\n\n');
   },
 };
 
