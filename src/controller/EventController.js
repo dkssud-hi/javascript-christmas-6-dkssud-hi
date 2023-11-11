@@ -61,7 +61,7 @@ class EventController {
   }
 
   checkSpecialDiscountEvent(date) {
-    if (SPECIAL_EVENT.APPLICABLE_DATES.includes(date)) {
+    if (!SPECIAL_EVENT.APPLICABLE_DATES.includes(date)) {
       return STATUS.NON_APPLICABLE;
     }
     const discountAmount = 1000;
