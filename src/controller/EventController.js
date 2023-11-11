@@ -5,6 +5,7 @@ import {
   GIVEAWAY_EVENT,
   EVENT,
   WEEKDAY_EVENT,
+  WEEKEND_EVENT,
 } from '../constants/EventConstants';
 
 class EventController {
@@ -67,6 +68,12 @@ class EventController {
     }, 0);
 
     return discountAmount;
+  }
+
+  checkWeekendDiscountEvent(date, menus) {
+    if (!WEEKEND_EVENT.APPLICABLE_DATES.includes(date)) {
+      return STATUS.NON_APPLICABLE;
+    }
   }
 }
 
