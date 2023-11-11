@@ -16,4 +16,16 @@ describe('EventController 클래스 테스트', () => {
     //then
     expect(result).toEqual(145000);
   });
+
+  test('금액을 , 단위로 나누어주는 기능 테스트', () => {
+    //given
+    const mockAmount = 10000000000;
+    const controller = new EventController();
+
+    //when
+    const result = controller.ConvertAmountToString(mockAmount);
+
+    //then
+    expect(result).toEqual('10,000,000,000');
+  });
 });
