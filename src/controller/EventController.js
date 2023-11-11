@@ -28,6 +28,13 @@ class EventController {
 
     return convertToArray.reverse().join('');
   }
+
+  CheckGiveawayEvent(amount) {
+    if (amount >= 120000) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export default EventController;
