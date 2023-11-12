@@ -35,7 +35,8 @@ class EventController {
     benefitAmountList.push(['특별 할인', this.checkSpecialDiscountEvent(date)]);
     benefitAmountList.push(['증정 이벤트', this.checkGiveawayEvent(amount)]);
 
-    const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur); //후에 모델에 데이터 저장
+    const benefitAmount =
+      amount < 10000 ? 0 : benefitAmountList.reduce((acc, cur) => acc + cur); //후에 모델에 데이터 저장
 
     return benefitAmountList;
   }
