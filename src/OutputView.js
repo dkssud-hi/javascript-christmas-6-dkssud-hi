@@ -44,6 +44,8 @@ const OutputView = {
     Console.print('<할인 후 예상 결제 금액>');
     Console.print(`${amount - discountAmount}원\n\n`);
   },
+
+  printA,
 };
 
 export default OutputView;

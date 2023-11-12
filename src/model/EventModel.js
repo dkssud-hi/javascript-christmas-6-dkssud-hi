@@ -1,6 +1,8 @@
 class EventModel {
   #date;
   #menu;
+  #benefitAmount;
+  #amount;
 
   setDate(date) {
     this.#date = date;
