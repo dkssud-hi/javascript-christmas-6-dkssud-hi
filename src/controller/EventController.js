@@ -40,6 +40,16 @@ class EventController {
     return benefitAmountList;
   }
 
+  calculateTotalDiscountAmount(amount, benefitAmount) {
+    // 증정이벤트
+    if (amount < GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
+      return benefitAmount ? amount - benefitAmount : amount;
+    }
+    return benefitAmount
+      ? amount - (benefitAmount - GIVEAWAY_EVENT.APPLICABLE_AMOUNT)
+      : amount;
+  }
+
   checkGiveawayEvent(amount) {
     if (amount >= GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
       return PRICE_OF_MENUS.샴페인;
