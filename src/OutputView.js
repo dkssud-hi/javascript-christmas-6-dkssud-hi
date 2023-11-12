@@ -45,7 +45,18 @@ const OutputView = {
     Console.print(`${amount - discountAmount}원\n\n`);
   },
 
-  printA,
+  printDecamberEventBadge(discountAmount) {
+    Console.print('<12월 이벤트 배지>');
+    if (discountAmount >= 20000) {
+      Console.print('산타\n\n');
+    } else if (discountAmount >= 10000) {
+      Console.print('트리\n\n');
+    } else if (discountAmount >= 5000) {
+      Console.print('별\n\n');
+    } else {
+      Console.print('없음\n\n');
+    }
+  },
 };
 
 export default OutputView;
