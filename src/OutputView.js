@@ -50,7 +50,6 @@ const OutputView = {
   },
 
   printAmountAfterDiscount(discountAmount, amount) {
-    // 할인 금액은 컨트롤러에서 계산하여 증정이벤트 비용은 뺴서 전달
     Console.print('<할인 후 예상 결제 금액>');
     Console.print(`${amount - discountAmount}원\n\n`);
   },
