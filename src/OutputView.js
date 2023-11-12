@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { GIVEAWAY_EVENT } from './constants/EventConstants';
 
 const OutputView = {
   printMenu(menus) {
@@ -13,6 +14,13 @@ const OutputView = {
   printTotalAmountBeforeDiscount(amount) {
     Console.print('<할인 전 총주문 금액>');
     Console.print(`${amount}원`);
+  },
+  printGiveaway(amount) {
+    Console.print('<증정 메뉴>');
+    if (amount >= GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
+      Console.print('샴페인 1개\n\n');
+    }
+    Console.print('없음\n\n');
   },
 
   printTotalDiscountDetail(benefitAmountList, benefitAmount) {
