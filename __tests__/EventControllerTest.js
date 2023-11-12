@@ -19,18 +19,6 @@ describe('EventController 클래스 테스트', () => {
     expect(result).toEqual(145000);
   });
 
-  test('금액을 , 단위로 나누어주는 기능 테스트', () => {
-    //given
-    const mockAmount = 10000000000;
-    const controller = new EventController();
-
-    //when
-    const result = controller.convertAmountToString(mockAmount);
-
-    //then
-    expect(result).toEqual('10,000,000,000');
-  });
-
   test('증정이벤트에 해당하는지 판별하는 기능 테스트', () => {
     //given
     const mockAmount = [50000, 150000];
@@ -117,7 +105,7 @@ describe('EventController 클래스 테스트', () => {
     ];
     const controller = new EventController();
 
-    const result = controller.getBenefitAmountList(142000, 3, [
+    const result = controller.calculateBenefitAmountList(142000, 3, [
       { name: '티본스테이크', quantity: '1' },
       { name: '바비큐립', quantity: '1' },
       { name: '초코케이크', quantity: '2' },
