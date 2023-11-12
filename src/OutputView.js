@@ -30,6 +30,11 @@ const OutputView = {
     });
     Console.print('\n\n');
   },
+
+  printTotalDiscountAmount(benefitAmountList) {
+    const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur); // utill화
+    Console.print(`${benefitAmount}원\n\n`);
+  },
 };
 
 export default OutputView;
