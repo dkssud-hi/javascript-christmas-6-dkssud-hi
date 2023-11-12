@@ -105,4 +105,25 @@ describe('EventController 클래스 테스트', () => {
       expect(result).toEqual(expectResult[idx]);
     });
   });
+
+  test('할인 혜택 총 금액을 계산해주는 기능 테스트', () => {
+    //given
+    const expectResult = [
+      ['크리스마스 디데이 할인', 1200],
+      ['평일 할인', 4046],
+      ['주말 할인', 0],
+      ['특별 할인', 1000],
+      ['증정 이벤트', 25000],
+    ];
+    const controller = new EventController();
+
+    const result = controller.getBenefitAmountList(142000, 3, [
+      { name: '티본스테이크', quantity: '1' },
+      { name: '바비큐립', quantity: '1' },
+      { name: '초코케이크', quantity: '2' },
+      { name: '제로콜라', quantity: '1' },
+    ]);
+
+    expect(result).toEqual(expectResult);
+  });
 });

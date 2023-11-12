@@ -18,7 +18,7 @@ class EventController {
     return amount;
   }
 
-  calculateBenefitAmount(amount, date, menus) {
+  getBenefitAmountList(amount, date, menus) {
     const benefitAmountList = [];
     benefitAmountList.push([
       '크리스마스 디데이 할인',
@@ -37,7 +37,7 @@ class EventController {
 
     const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur);
 
-    return { benefitAmount, benefitAmountList };
+    return benefitAmountList;
   }
 
   checkGiveawayEvent(amount) {
