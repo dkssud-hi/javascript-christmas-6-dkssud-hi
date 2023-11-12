@@ -35,8 +35,6 @@ class EventController {
     benefitAmountList.push(['특별 할인', this.checkSpecialDiscountEvent(date)]);
     benefitAmountList.push(['증정 이벤트', this.checkGiveawayEvent(amount)]);
 
-    const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur);
-
     return benefitAmountList;
   }
 
