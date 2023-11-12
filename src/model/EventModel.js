@@ -1,38 +1,57 @@
 class EventModel {
   #date;
-  #menu;
-  #benefitAmount;
+  #menus;
   #amount;
+  #benefitAmountList;
+  #benefitAmount;
+  #discountAmount;
 
-  setDate(date) {
+  set date(date) {
     this.#date = date;
   }
 
-  getDate() {
+  get date() {
     return this.#date;
   }
 
-  setMenu(menu) {
-    this.#menu = this.summarizeOrder(menu);
+  set menus(menus) {
+    this.#menus = menus;
   }
 
-  getMenu() {
-    return this.#menu;
+  get menus() {
+    return this.#menus;
   }
 
-  summarizeOrder(order) {
-    const summary = order
-      .split(',')
-      .map((el) => el.trim())
-      .map((el) => {
-        const menuInfo = el.split('-');
-        return { name: menuInfo[0], quantity: menuInfo[1] };
-      });
-    /* 
-     주문 정렬 형식
-     : [[{name:메뉴1, quantity:주문수}],[{name:메뉴1, quantity:주문수}], ...]
-     */
-    return summary;
+  set amount(amount) {
+    this.#amount = amount;
+  }
+
+  get amount() {
+    return this.#amount;
+  }
+
+  set benefitAmount(benefitAmount) {
+    this.#benefitAmount = benefitAmount;
+  }
+
+  get benefitAmount() {
+    return this.#benefitAmount;
+  }
+
+  set benefitAmountList(benefitAmountList) {
+    this.#benefitAmountList = benefitAmountList;
+  }
+
+  get benefitAmountList() {
+    return this.#benefitAmountList;
+  }
+
+  set discountAmount(discountAmount) {
+    this.#discountAmount = discountAmount;
+  }
+
+  get discountAmount() {
+    return this.#discountAmount;
   }
 }
 

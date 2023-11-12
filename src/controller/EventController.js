@@ -1,4 +1,6 @@
 import { PRICE_OF_MENUS, CATEGORY_OF_MENUS } from '../constants/MenuInfo';
+import InputView from '../InputView';
+import OutputView from '../OutputView';
 import {
   STATUS,
   CHRISMAS_D_DAY,
@@ -9,16 +11,57 @@ import {
 } from '../constants/EventConstants';
 
 class EventController {
+  model;
+
+  constructor(model) {
+    this.model = model;
+  }
+
+  async startEvent() {
+    this.model.date = await InputView.readDate();
+    this.model.menus = await InputView.readOrder();
+    this.model.amount = this.calculateTotalAmountBeforeDiscount(
+      this.model.menus
+    );
+    this.model.benefitAmountList = this.calculateBenefitAmountList(
+      this.model.amount,
+      this.model.date,
+      this.model.menus
+    );
+    this.model.benefitAmount = this.calculateBenefitAmount(
+      this.model.amount,
+      this.model.benefitAmountList
+    );
+    this.model.discountAmount = this.calculateTotalDiscountAmount(
+      this.model.amount,
+      this.model.benefitAmount
+    );
+
+    OutputView.printMenu(this.model.menus);
+    OutputView.printTotalAmountBeforeDiscount(this.model.amount);
+    OutputView.printGiveaway(this.model.amount);
+    OutputView.printTotalDiscountDetail(
+      this.model.benefitAmountList,
+      this.model.benefitAmount
+    );
+    OutputView.printTotalDiscountAmount(this.model.benefitAmount);
+    OutputView.printAmountAfterDiscount(
+      this.model.discountAmount,
+      this.model.amount
+    );
+    OutputView.printDecemberEventBadge(this.model.discountAmount);
+  }
+
   calculateTotalAmountBeforeDiscount(menus) {
     let amount = 0;
     menus.forEach((menu) => {
       amount += Number(PRICE_OF_MENUS[menu.name]) * Number(menu.quantity);
     });
 
-    return amount; // 추후 모델에 저장
+    return amount;
   }
 
-  getBenefitAmountList(amount, date, menus) {
+  calculateBenefitAmountList(amount, date, menus) {
     const benefitAmountList = [];
     benefitAmountList.push([
       '크리스마스 디데이 할인',
@@ -35,14 +78,19 @@ class EventController {
     benefitAmountList.push(['특별 할인', this.checkSpecialDiscountEvent(date)]);
     benefitAmountList.push(['증정 이벤트', this.checkGiveawayEvent(amount)]);
 
-    const benefitAmount =
-      amount < 10000 ? 0 : benefitAmountList.reduce((acc, cur) => acc + cur); //후에 모델에 데이터 저장
-
     return benefitAmountList;
   }
 
+  calculateBenefitAmount(amount, benefitAmountList) {
+    const benefitAmount =
+      amount < 10000
+        ? 0
+        : benefitAmountList.reduce((acc, cur) => acc + cur[1], 0);
+
+    return benefitAmount;
+  }
+
   calculateTotalDiscountAmount(amount, benefitAmount) {
-    // 증정이벤트
     if (amount < GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
       return benefitAmount ? amount - benefitAmount : amount;
     }
