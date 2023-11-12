@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from './constants/ErrorMessage';
-import { ALL_MENU } from './constants/MenuInfo';
+import { ERROR_MESSAGE } from '../constants/ErrorMessage';
+import { ALL_MENU } from '../constants/MenuInfo';
 
 const InputView = {
   async readDate() {

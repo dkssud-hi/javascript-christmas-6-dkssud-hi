@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { GIVEAWAY_EVENT } from './constants/EventConstants';
+import { GIVEAWAY_EVENT } from '../constants/EventConstants';
 
 const OutputView = {
   printMenu(menus) {

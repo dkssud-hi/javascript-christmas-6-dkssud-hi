@@ -1,6 +1,6 @@
 import { PRICE_OF_MENUS, CATEGORY_OF_MENUS } from '../constants/MenuInfo';
-import InputView from '../InputView';
-import OutputView from '../OutputView';
+import InputView from '../view/InputView';
+import OutputView from '../view/OutputView';
 import {
   STATUS,
   CHRISMAS_D_DAY,
