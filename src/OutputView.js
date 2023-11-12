@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { MissionUtils } from '@woowacourse/mission-utils';
 import { GIVEAWAY_EVENT } from './constants/EventConstants';
 
 const OutputView = {
@@ -15,36 +16,37 @@ const OutputView = {
     Console.print('<할인 전 총주문 금액>');
     Console.print(`${amount}원`);
   },
+
   printGiveaway(amount) {
     Console.print('<증정 메뉴>');
     if (amount >= GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
       Console.print('샴페인 1개\n\n');
+    } else {
+      Console.print('없음\n\n');
     }
-    Console.print('없음\n\n');
   },
 
   printTotalDiscountDetail(benefitAmountList, benefitAmount) {
     Console.print('<혜택 내역>');
     if (benefitAmount === 0) {
       Console.print('없음\n\n');
-      return;
+    } else {
+      benefitAmountList.forEach((benefit) => {
+        if (benefit[1]) {
+          Console.print(`${benefit[0]}: -${benefit[1]}\n`);
+        }
+      });
     }
-
-    benefitAmountList.forEach((benefit) => {
-      if (benefit[1]) {
-        Console.print(`${benefit[0]}: -${benefit[1]}`);
-      }
-    });
-    Console.print('\n\n');
+    Console.print('\n');
   },
 
-  printTotalDiscountAmount(benefitAmountList) {
+  printTotalDiscountAmount(benefitAmount) {
     Console.print('<총혜택 금액>');
-    const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur); // model에 저장해서 한번의 계산으로 사용
     if (benefitAmount === 0) {
       Console.print(`${benefitAmount}원\n\n`);
+    } else {
+      Console.print(`-${benefitAmount}원\n\n`);
     }
-    Console.print(`-${benefitAmount}원\n\n`);
   },
 
   printAmountAfterDiscount(discountAmount, amount) {
@@ -53,7 +55,7 @@ const OutputView = {
     Console.print(`${amount - discountAmount}원\n\n`);
   },
 
-  printDecamberEventBadge(discountAmount) {
+  printDecemberEventBadge(discountAmount) {
     Console.print('<12월 이벤트 배지>');
     if (discountAmount >= 20000) {
       Console.print('산타\n\n');
