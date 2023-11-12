@@ -1,6 +1,7 @@
 export const STATUS = {
   APPLICABLE: true,
   NON_APPLICABLE: false,
+  NON_APPLICABLE_AMOUNT: 0,
 };
 
 export const CHRISMAS_D_DAY = {
