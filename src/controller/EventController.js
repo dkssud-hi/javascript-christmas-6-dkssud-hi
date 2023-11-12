@@ -15,7 +15,7 @@ class EventController {
       amount += Number(PRICE_OF_MENUS[menu.name]) * Number(menu.quantity);
     });
 
-    return amount;
+    return amount; // 추후 모델에 저장
   }
 
   getBenefitAmountList(amount, date, menus) {
@@ -34,6 +34,8 @@ class EventController {
     ]);
     benefitAmountList.push(['특별 할인', this.checkSpecialDiscountEvent(date)]);
     benefitAmountList.push(['증정 이벤트', this.checkGiveawayEvent(amount)]);
+
+    const benefitAmount = benefitAmountList.reduce((acc, cur) => acc + cur); //후에 모델에 데이터 저장
 
     return benefitAmountList;
   }
