@@ -20,7 +20,6 @@ const getLogSpy = () => {
 };
 
 const getOutput = (logSpy) => {
-  console.log('값 출력', logSpy.mock.calls);
   return [...logSpy.mock.calls].join(LINE_SEPARATOR);
 };
 
