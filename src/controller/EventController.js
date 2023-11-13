@@ -18,26 +18,42 @@ class EventController {
   }
 
   async startEvent() {
-    this.#model.date = await InputView.readDate();
-    this.#model.menus = await InputView.readOrder();
-    this.manufactureDataOfModel();
+    await this.manufactureDataOfModel();
 
     this.printResultOfEvent();
   }
 
-  manufactureDataOfModel() {
+  async manufactureDataOfModel() {
+    this.#model.date = await InputView.readDate();
+    this.#model.menus = await InputView.readOrder();
+    this.setModelAmount();
+    this.setModelBenefitAmountList();
+    this.setModelBenefitAmount();
+    this.setModelDiscountAmount();
+  }
+
+  setModelAmount() {
     this.#model.amount = this.calculateTotalAmountBeforeDiscount(
       this.#model.menus
     );
+  }
+
+  setModelBenefitAmountList() {
     this.#model.benefitAmountList = this.calculateBenefitAmountList(
       this.#model.amount,
       this.#model.date,
       this.#model.menus
     );
+  }
+
+  setModelBenefitAmount() {
     this.#model.benefitAmount = this.calculateBenefitAmount(
       this.#model.amount,
       this.#model.benefitAmountList
     );
+  }
+
+  setModelDiscountAmount() {
     this.#model.discountAmount = this.calculateTotalDiscountAmount(
       this.#model.amount,
       this.#model.benefitAmount
