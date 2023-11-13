@@ -22,19 +22,7 @@ class EventController {
     this.model.menus = await InputView.readOrder();
     this.manufactureDataOfModel();
 
-    OutputView.printMenu(this.model.menus);
-    OutputView.printTotalAmountBeforeDiscount(this.model.amount);
-    OutputView.printGiveaway(this.model.amount);
-    OutputView.printTotalDiscountDetail(
-      this.model.benefitAmountList,
-      this.model.benefitAmount
-    );
-    OutputView.printTotalDiscountAmount(this.model.benefitAmount);
-    OutputView.printAmountAfterDiscount(
-      this.model.discountAmount,
-      this.model.amount
-    );
-    OutputView.printDecemberEventBadge(this.model.discountAmount);
+    this.printResultOfEvent();
   }
 
   manufactureDataOfModel() {
@@ -54,6 +42,22 @@ class EventController {
       this.model.amount,
       this.model.benefitAmount
     );
+  }
+
+  printResultOfEvent() {
+    OutputView.printMenu(this.model.menus);
+    OutputView.printTotalAmountBeforeDiscount(this.model.amount);
+    OutputView.printGiveaway(this.model.amount);
+    OutputView.printTotalDiscountDetail(
+      this.model.benefitAmountList,
+      this.model.benefitAmount
+    );
+    OutputView.printTotalDiscountAmount(this.model.benefitAmount);
+    OutputView.printAmountAfterDiscount(
+      this.model.discountAmount,
+      this.model.amount
+    );
+    OutputView.printDecemberEventBadge(this.model.discountAmount);
   }
 
   calculateTotalAmountBeforeDiscount(menus) {
