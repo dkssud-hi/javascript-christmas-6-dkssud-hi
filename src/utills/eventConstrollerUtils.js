@@ -6,6 +6,7 @@ import {
   EVENT,
   WEEKDAY_EVENT,
   SPECIAL_EVENT,
+  BENEFIT_LIST,
 } from '../constants/EventConstants';
 
 const controllerUtils = {
@@ -94,6 +95,19 @@ const controllerUtils = {
     }
     const discountAmount = 1000;
     return discountAmount;
+  },
+  calculateBenefitAmountList(amount, date, menus) {
+    const benefitAmountList = [...BENEFIT_LIST];
+    benefitAmountList[0].push(controllerUtils.checkChirsmasDdayEvent(date));
+    benefitAmountList[1].push(
+      controllerUtils.checkWeekdayDiscountEvent(date, menus)
+    );
+    benefitAmountList[2].push(
+      controllerUtils.checkWeekendDiscountEvent(date, menus)
+    );
+    benefitAmountList[3].push(controllerUtils.checkSpecialDiscountEvent(date));
+    benefitAmountList[4].push(controllerUtils.checkGiveawayEvent(amount));
+    return benefitAmountList;
   },
 };
 

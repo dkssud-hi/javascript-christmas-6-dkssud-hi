@@ -31,7 +31,7 @@ class EventController {
   }
 
   setModelBenefitAmountList() {
-    this.#model.benefitAmountList = this.calculateBenefitAmountList(
+    this.#model.benefitAmountList = controllerUtils.calculateBenefitAmountList(
       this.#model.amount,
       this.#model.date,
       this.#model.menus
@@ -66,26 +66,6 @@ class EventController {
       this.#model.amount
     );
     OutputView.printDecemberEventBadge(this.#model.discountAmount);
-  }
-
-  calculateBenefitAmountList(amount, date, menus) {
-    const benefitAmountList = [
-      ['크리스마스 디데이 할인'],
-      ['평일 할인'],
-      ['주말 할인'],
-      ['특별 할인'],
-      ['증정 이벤트'],
-    ];
-    benefitAmountList[0].push(controllerUtils.checkChirsmasDdayEvent(date));
-    benefitAmountList[1].push(
-      controllerUtils.checkWeekdayDiscountEvent(date, menus)
-    );
-    benefitAmountList[2].push(
-      controllerUtils.checkWeekendDiscountEvent(date, menus)
-    );
-    benefitAmountList[3].push(controllerUtils.checkSpecialDiscountEvent(date));
-    benefitAmountList[4].push(controllerUtils.checkGiveawayEvent(amount));
-    return benefitAmountList;
   }
 }
 
