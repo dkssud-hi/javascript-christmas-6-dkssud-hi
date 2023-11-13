@@ -11,53 +11,53 @@ import {
 } from '../constants/EventConstants';
 
 class EventController {
-  model;
+  #model;
 
   constructor(model) {
-    this.model = model;
+    this.#model = model;
   }
 
   async startEvent() {
-    this.model.date = await InputView.readDate();
-    this.model.menus = await InputView.readOrder();
+    this.#model.date = await InputView.readDate();
+    this.#model.menus = await InputView.readOrder();
     this.manufactureDataOfModel();
 
     this.printResultOfEvent();
   }
 
   manufactureDataOfModel() {
-    this.model.amount = this.calculateTotalAmountBeforeDiscount(
-      this.model.menus
+    this.#model.amount = this.calculateTotalAmountBeforeDiscount(
+      this.#model.menus
     );
-    this.model.benefitAmountList = this.calculateBenefitAmountList(
-      this.model.amount,
-      this.model.date,
-      this.model.menus
+    this.#model.benefitAmountList = this.calculateBenefitAmountList(
+      this.#model.amount,
+      this.#model.date,
+      this.#model.menus
     );
-    this.model.benefitAmount = this.calculateBenefitAmount(
-      this.model.amount,
-      this.model.benefitAmountList
+    this.#model.benefitAmount = this.calculateBenefitAmount(
+      this.#model.amount,
+      this.#model.benefitAmountList
     );
-    this.model.discountAmount = this.calculateTotalDiscountAmount(
-      this.model.amount,
-      this.model.benefitAmount
+    this.#model.discountAmount = this.calculateTotalDiscountAmount(
+      this.#model.amount,
+      this.#model.benefitAmount
     );
   }
 
   printResultOfEvent() {
-    OutputView.printMenu(this.model.menus);
-    OutputView.printTotalAmountBeforeDiscount(this.model.amount);
-    OutputView.printGiveaway(this.model.amount);
+    OutputView.printMenu(this.#model.menus);
+    OutputView.printTotalAmountBeforeDiscount(this.#model.amount);
+    OutputView.printGiveaway(this.#model.amount);
     OutputView.printTotalDiscountDetail(
-      this.model.benefitAmountList,
-      this.model.benefitAmount
+      this.#model.benefitAmountList,
+      this.#model.benefitAmount
     );
-    OutputView.printTotalDiscountAmount(this.model.benefitAmount);
+    OutputView.printTotalDiscountAmount(this.#model.benefitAmount);
     OutputView.printAmountAfterDiscount(
-      this.model.discountAmount,
-      this.model.amount
+      this.#model.discountAmount,
+      this.#model.amount
     );
-    OutputView.printDecemberEventBadge(this.model.discountAmount);
+    OutputView.printDecemberEventBadge(this.#model.discountAmount);
   }
 
   calculateTotalAmountBeforeDiscount(menus) {
