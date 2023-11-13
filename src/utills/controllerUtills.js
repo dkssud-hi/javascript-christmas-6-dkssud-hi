@@ -9,7 +9,7 @@ import {
   BENEFIT_LIST,
 } from '../constants/EventConstants';
 
-const controllerUtils = {
+const controllerUtills = {
   calculateTotalAmountBeforeDiscount(menus) {
     let amount = 0;
     menus.forEach((menu) => {
@@ -98,17 +98,17 @@ const controllerUtils = {
   },
   calculateBenefitAmountList(amount, date, menus) {
     const benefitAmountList = [...BENEFIT_LIST];
-    benefitAmountList[0].push(controllerUtils.checkChirsmasDdayEvent(date));
+    benefitAmountList[0].push(controllerUtills.checkChirsmasDdayEvent(date));
     benefitAmountList[1].push(
-      controllerUtils.checkWeekdayDiscountEvent(date, menus)
+      controllerUtills.checkWeekdayDiscountEvent(date, menus)
     );
     benefitAmountList[2].push(
-      controllerUtils.checkWeekendDiscountEvent(date, menus)
+      controllerUtills.checkWeekendDiscountEvent(date, menus)
     );
-    benefitAmountList[3].push(controllerUtils.checkSpecialDiscountEvent(date));
-    benefitAmountList[4].push(controllerUtils.checkGiveawayEvent(amount));
+    benefitAmountList[3].push(controllerUtills.checkSpecialDiscountEvent(date));
+    benefitAmountList[4].push(controllerUtills.checkGiveawayEvent(amount));
     return benefitAmountList;
   },
 };
 
-export default controllerUtils;
+export default controllerUtills;

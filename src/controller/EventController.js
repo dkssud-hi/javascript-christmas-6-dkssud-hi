@@ -1,4 +1,4 @@
-import controllerUtils from '../utills/eventConstrollerUtils';
+import controllerUtills from '../utills/controllerUtills';
 import InputView from '../view/InputView';
 import OutputView from '../view/OutputView';
 
@@ -25,13 +25,13 @@ class EventController {
   }
 
   setModelAmount() {
-    this.#model.amount = controllerUtils.calculateTotalAmountBeforeDiscount(
+    this.#model.amount = controllerUtills.calculateTotalAmountBeforeDiscount(
       this.#model.menus
     );
   }
 
   setModelBenefitAmountList() {
-    this.#model.benefitAmountList = controllerUtils.calculateBenefitAmountList(
+    this.#model.benefitAmountList = controllerUtills.calculateBenefitAmountList(
       this.#model.amount,
       this.#model.date,
       this.#model.menus
@@ -39,14 +39,14 @@ class EventController {
   }
 
   setModelBenefitAmount() {
-    this.#model.benefitAmount = controllerUtils.calculateBenefitAmount(
+    this.#model.benefitAmount = controllerUtills.calculateBenefitAmount(
       this.#model.amount,
       this.#model.benefitAmountList
     );
   }
 
   setModelDiscountAmount() {
-    this.#model.discountAmount = controllerUtils.calculateTotalDiscountAmount(
+    this.#model.discountAmount = controllerUtills.calculateTotalDiscountAmount(
       this.#model.amount,
       this.#model.benefitAmount
     );
