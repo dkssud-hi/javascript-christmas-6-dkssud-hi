@@ -86,22 +86,18 @@ class EventController {
   }
 
   calculateBenefitAmountList(amount, date, menus) {
-    const benefitAmountList = [];
-    benefitAmountList.push([
-      '크리스마스 디데이 할인',
-      this.checkChirsmasDdayEvent(date),
-    ]);
-    benefitAmountList.push([
-      '평일 할인',
-      this.checkWeekdayDiscountEvent(date, menus),
-    ]);
-    benefitAmountList.push([
-      '주말 할인',
-      this.checkWeekendDiscountEvent(date, menus),
-    ]);
-    benefitAmountList.push(['특별 할인', this.checkSpecialDiscountEvent(date)]);
-    benefitAmountList.push(['증정 이벤트', this.checkGiveawayEvent(amount)]);
-
+    const benefitAmountList = [
+      ['크리스마스 디데이 할인'],
+      ['평일 할인'],
+      ['주말 할인'],
+      ['특별 할인'],
+      ['증정 이벤트'],
+    ];
+    benefitAmountList[0].push(this.checkChirsmasDdayEvent(date));
+    benefitAmountList[1].push(this.checkWeekdayDiscountEvent(date, menus));
+    benefitAmountList[2].push(this.checkWeekendDiscountEvent(date, menus));
+    benefitAmountList[3].push(this.checkSpecialDiscountEvent(date));
+    benefitAmountList[4].push(this.checkGiveawayEvent(amount));
     return benefitAmountList;
   }
 
