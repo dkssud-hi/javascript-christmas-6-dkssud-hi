@@ -1,22 +1,18 @@
-const convertAmountToString = function convertAmountToRealityCashNotation(
-  amount
-) {
-  //utill
-  const stringAmount = String(amount);
-  const insertPoint = 3;
-  let countPoint = 0;
+let countPoint = 0;
+
+const convertAmountToString = function convertToRealityCashNotation(amount) {
   const convertToArray = [];
 
-  [...stringAmount].reverse().forEach((syllable) => {
+  [...String(amount)].reverse().forEach((syllable) => {
     convertToArray.push(syllable);
     countPoint += 1;
 
-    if (countPoint === insertPoint) {
+    if (countPoint === 3) {
       convertToArray.push(',');
       countPoint = 0;
     }
   });
-
+  countPoint = 0;
   return convertToArray.reverse().join('');
 };
 
