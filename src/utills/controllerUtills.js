@@ -56,9 +56,11 @@ const controllerUtills = {
   },
 
   calculateDayEventDiscountAmount(menus, category) {
-    const discountAmount = menus.reduce((amount, menu) => {
+    const discountAmount = menus.reduce((tempAmount, menu) => {
+      let amount = tempAmount;
       if (category.includes(menu.name)) {
-        return (amount += EVENT.DISCOUNT * menu.quantity);
+        amount += EVENT.DISCOUNT * menu.quantity;
+        return amount;
       }
       return amount;
     }, 0);
