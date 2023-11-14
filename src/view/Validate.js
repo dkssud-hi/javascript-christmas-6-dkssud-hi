@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constants/ErrorMessage';
+import { ERROR_MESSAGE } from '../constants/Message';
 import { ALL_MENU } from '../constants/MenuInfo';
 
 const Validate = {
