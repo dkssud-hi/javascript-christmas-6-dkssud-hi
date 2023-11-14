@@ -73,4 +73,17 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
       Validate.validateMenuOnlyDrink(mockSummarizedOrder);
     }).toThrow(ERROR_MESSAGE.IS_ONLY_DRINK);
   });
+
+  test('총 주문 수량이 20개가 넘을 때 올바르게 유효성 검사가 작동하는지 테스트', () => {
+    //given
+    const mockInput =
+      '제로콜라-1,레드와인-2,티본스테이크-10,크리스마스파스타-10';
+    const mockSummarizedOrder = summarizeOrder(mockInput);
+
+    //when
+    expect(() => {
+      //then
+      Validate.validateSumOfOrderQuantity(mockSummarizedOrder);
+    }).toThrow(ERROR_MESSAGE.OVER_SUM_OF_ORDER_QUANTITY);
+  });
 });
