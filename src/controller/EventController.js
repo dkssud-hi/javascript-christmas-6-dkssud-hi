@@ -53,7 +53,7 @@ class EventController {
   }
 
   printResultOfEvent() {
-    OutputView.printMenu(this.#model.menus);
+    OutputView.printMenu(this.#model.menus, this.#model.date);
     OutputView.printTotalAmountBeforeDiscount(this.#model.amount);
     OutputView.printGiveaway(this.#model.amount);
     OutputView.printTotalDiscountDetail(

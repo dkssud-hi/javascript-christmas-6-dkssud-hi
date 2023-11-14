@@ -2,7 +2,15 @@ import { Console } from '@woowacourse/mission-utils';
 import { GIVEAWAY_EVENT } from '../constants/EventConstants';
 
 const OutputView = {
-  printMenu(menus) {
+  startPrintBenefits(date) {
+    Console.print(
+      `12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n\n`
+    );
+  },
+
+  printMenu(menus, date) {
+    this.startPrintBenefits(date);
+
     Console.print('<주문 메뉴>');
     menus.forEach((menu) => {
       Console.print(`${menu.name} ${menu.quantity}개`);
