@@ -1,5 +1,4 @@
 function summarizeOrder(order) {
-  //utill
   const summary = order
     .split(',')
     .map((el) => el.trim())
