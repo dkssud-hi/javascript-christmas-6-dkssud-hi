@@ -4,7 +4,6 @@ import { ALL_MENU, CATEGORY_OF_MENUS } from '../constants/MenuInfo';
 const Validate = {
   validateDate(date) {
     if (date < 1 || date > 31 || Number.isNaN(date)) {
-      console.log(date);
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
