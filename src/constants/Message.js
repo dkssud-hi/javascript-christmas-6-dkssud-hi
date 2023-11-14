@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = Object.freeze({
   NOT_VALID_MENU_FORMAT: `${PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
   MENU_DUPLICATION: `${PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
   IS_ONLY_DRINK: `${PREFIX} 음료만 주문하실 수 없습니다. 주의사항을 확인하신 후 다시 입력해 주세요.`,
+  OVER_SUM_OF_ORDER_QUANTITY: `${PREFIX} 주문수량을 초과하였습니다, 주문은 한번에 20개까지 가능합니다. 다시 입력해 주세요`,
 });
 
 export const MESSAGE = Object.freeze({

@@ -67,6 +67,17 @@ const Validate = {
       throw new Error(ERROR_MESSAGE.IS_ONLY_DRINK);
     }
   },
+
+  validateSumOfOrderQuantity(summarizedOrder) {
+    const sumOfOrderQuantity = summarizedOrder.reduce(
+      (acc, cur) => acc + cur.quantity,
+      summarizedOrder[0].quantity
+    );
+
+    if (sumOfOrderQuantity > 20) {
+      throw new Error(ERROR_MESSAGE.OVER_SUM_OF_ORDER_QUANTITY);
+    }
+  },
 };
 
 export default Validate;
