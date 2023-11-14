@@ -1,15 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
+import { MESSAGE } from '../constants/\bMessage';
 import Validate from './Validate';
 import summarizeOrder from '../utills/summarizeOrder';
 
 const InputView = {
   async readDate() {
     try {
-      const date = Number(
-        await Console.readLineAsync(
-          '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)'
-        )
-      );
+      const date = Number(await Console.readLineAsync(MESSAGE.GREET_USER));
       Validate.validateDate(date);
 
       return date;
@@ -22,7 +19,7 @@ const InputView = {
   async readOrder() {
     try {
       const beforSummarizedOrder = await Console.readLineAsync(
-        '주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)'
+        `${MESSAGE.EVENT_INFO}${MESSAGE.MENU_INFO}`
       );
       const summarizedOrder = summarizeOrder(beforSummarizedOrder);
       Validate.validateOrder(beforSummarizedOrder, summarizedOrder);
