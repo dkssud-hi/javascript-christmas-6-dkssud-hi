@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from '../constants/Message';
-import { ALL_MENU } from '../constants/MenuInfo';
+import { ERROR_MESSAGE, MESSAGE } from '../constants/Message';
+import { ALL_MENU, CATEGORY_OF_MENUS } from '../constants/MenuInfo';
 
 const Validate = {
   validateDate(date) {
@@ -14,6 +14,7 @@ const Validate = {
     this.validateOrderQuantity(summarizedOrder);
     this.validateMenuFormat(beforSummarizedOrder);
     this.validateDuplicatedMenu(summarizedOrder);
+    this.validateMenuOnlyDrink(summarizedOrder);
   },
 
   validateIsMenu(summarizedOrder) {
@@ -55,6 +56,15 @@ const Validate = {
     const afterRemoveDuplication = [...new Set(menus)].length;
     if (prevMenusLength > afterRemoveDuplication) {
       throw new Error(ERROR_MESSAGE.MENU_DUPLICATION);
+    }
+  },
+
+  validateMenuOnlyDrink(summarizedOrder) {
+    const checkMenu = summarizedOrder.filter(
+      (menu) => !CATEGORY_OF_MENUS.DRINK.includes(menu.name)
+    );
+    if (checkMenu.length === 0) {
+      throw new Error(ERROR_MESSAGE.IS_ONLY_DRINK);
     }
   },
 };

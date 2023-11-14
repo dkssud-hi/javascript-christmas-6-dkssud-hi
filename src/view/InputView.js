@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constants/\bMessage';
+import { MESSAGE } from '../constants/Message';
 import Validate from './Validate';
 import summarizeOrder from '../utills/summarizeOrder';
 
