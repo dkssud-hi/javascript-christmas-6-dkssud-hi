@@ -8,7 +8,6 @@ import {
   WEEKDAY_EVENT,
 } from '../constants/EventConstants';
 import { CATEGORY_OF_MENUS, PRICE_OF_MENUS } from '../constants/MenuInfo';
-import controllerUtills from '../utills/controllerUtills';
 import InputView from '../view/InputView';
 import OutputView from '../view/OutputView';
 
@@ -50,6 +49,7 @@ class EventController {
     OutputView.printDecemberEventBadge(this.#model.discountAmount);
   }
 
+  // 모델의 데이터를 set 하는 메소드들
   setModelAmount() {
     this.#model.amount = this.calculateTotalAmountBeforeDiscount(
       this.#model.menus
@@ -61,17 +61,11 @@ class EventController {
   }
 
   setModelBenefitAmount() {
-    this.#model.benefitAmount = controllerUtills.calculateBenefitAmount(
-      this.#model.amount,
-      this.#model.benefitAmountList
-    );
+    this.#model.benefitAmount = this.calculateBenefitAmount();
   }
 
   setModelDiscountAmount() {
-    this.#model.discountAmount = controllerUtills.calculateTotalDiscountAmount(
-      this.#model.amount,
-      this.#model.benefitAmount
-    );
+    this.#model.discountAmount = this.calculateTotalDiscountAmount();
   }
 
   calculateTotalAmountBeforeDiscount() {
@@ -91,6 +85,27 @@ class EventController {
     benefitAmountList[3].push(this.checkSpecialDiscountEvent());
     benefitAmountList[4].push(this.checkGiveawayEvent());
     return benefitAmountList;
+  }
+
+  calculateBenefitAmount() {
+    const benefitAmount =
+      this.#model.amount < 10000
+        ? 0
+        : this.#model.benefitAmountList.reduce((acc, cur) => acc + cur[1], 0);
+
+    return benefitAmount;
+  }
+
+  calculateTotalDiscountAmount() {
+    if (this.#model.amount < GIVEAWAY_EVENT.APPLICABLE_AMOUNT) {
+      return this.#model.benefitAmount
+        ? this.#model.amount - this.#model.benefitAmount
+        : this.#model.amount;
+    }
+    return this.#model.benefitAmount
+      ? this.#model.amount -
+          (this.#model.benefitAmount - GIVEAWAY_EVENT.APPLICABLE_AMOUNT)
+      : this.#model.amount;
   }
 
   checkGiveawayEvent() {
