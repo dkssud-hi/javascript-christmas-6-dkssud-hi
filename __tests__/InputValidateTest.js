@@ -2,8 +2,8 @@ import Validate from '../src/view/Validate';
 import { ERROR_MESSAGE } from '../src/constants/Message';
 import summarizeOrder from '../src/utills/summarizeOrder';
 
-describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 테스트', () => {
-  test('입력받은 날짜에 대한 유효성 검사가 올바르게 작동하는지 테스트', () => {
+describe('입력값에 대한 유효성 검사를 하는 Validate 객체 테스트', () => {
+  test('유효하지 않은 날짜 입력에 대한 예외처리', () => {
     //given
     const mockDate = ['-1', 'a', '잘못된입력'];
 
@@ -15,7 +15,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     });
   });
 
-  test('주문 수량에 대한 유효성 검사가 올바르게 작동하는지 테스트', () => {
+  test('올바르지 않은 주문 수량 입력에 대한 예외처리', () => {
     //given
     const mockInput = '티본스테이크-0,양송이수프-1,제로콜라-a';
     const mockSummarizedOrder = summarizeOrder(mockInput);
@@ -27,7 +27,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     }).toThrow(ERROR_MESSAGE.NOT_VALID_ORDER_QUANTITY);
   });
 
-  test('주문한 메뉴가 존재하는 메뉴인지에 대한 유효성 검사가 올바르게 작동하는지 테스트', () => {
+  test('존재하지 않은 메뉴 주문에 대한 예외처리', () => {
     //given
     const mockInput = '피자-1,삼겹살-2';
     const mockSummarizedOrder = summarizeOrder(mockInput);
@@ -39,7 +39,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     }).toThrow(ERROR_MESSAGE.IS_NOT_MENU);
   });
 
-  test('올바른 형식으로 주문을 했는지에 대한 유효성 검사가 올바르게 작동하는지 테스트', () => {
+  test('올바르지 않은 주문 형식 입력에 애한 예외처리', () => {
     //given
     const mockInput = '양송이수프=2,제로콜라%3';
 
@@ -50,7 +50,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     }).toThrow(ERROR_MESSAGE.NOT_VALID_MENU_FORMAT);
   });
 
-  test('중복된 메뉴를 입력했을 때 유효성 검사가 올바르게 작동하는지 테스트', () => {
+  test('중복된 메뉴 입력에 대한 예외처리', () => {
     //given
     const mockInput = '양송이수프-1,양송이수프-2';
     const mockSummarizedOrder = summarizeOrder(mockInput);
@@ -62,7 +62,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     }).toThrow(ERROR_MESSAGE.MENU_DUPLICATION);
   });
 
-  test('음료만 주문했을 때 유효성 검사가 올바르게 작동하는지 테스트', () => {
+  test('음료만 주문했을경우에 대한 예외처리', () => {
     //given
     const mockInput = '제로콜라-1,레드와인-2';
     const mockSummarizedOrder = summarizeOrder(mockInput);
@@ -74,7 +74,7 @@ describe('입력값에 대한 유효성 검사를 하는 Validate 오브젝트 �
     }).toThrow(ERROR_MESSAGE.IS_ONLY_DRINK);
   });
 
-  test('총 주문 수량이 20개가 넘을 때 올바르게 유효성 검사가 작동하는지 테스트', () => {
+  test('제한된 주문 수량을 주문 했을 때에 대한 예외처리', () => {
     //given
     const mockInput =
       '제로콜라-1,레드와인-2,티본스테이크-10,크리스마스파스타-10';
