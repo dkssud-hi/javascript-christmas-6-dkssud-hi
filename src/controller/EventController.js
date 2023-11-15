@@ -49,7 +49,6 @@ class EventController {
     OutputView.printDecemberEventBadge(this.#model.discountAmount);
   }
 
-  // 모델의 데이터를 set 하는 메소드들
   setModelAmount() {
     this.#model.amount = this.calculateTotalAmountBeforeDiscount(
       this.#model.menus
