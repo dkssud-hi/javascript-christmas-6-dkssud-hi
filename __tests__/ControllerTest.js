@@ -1,19 +1,31 @@
-import controllerUtills from '../src/utills/controllerUtills';
 import { STATUS } from '../src/constants/EventConstants';
 import { PRICE_OF_MENUS } from '../src/constants/MenuInfo';
+import EventController from '../src/controller/EventController';
+import EventModel from '../src/model/EventModel';
 
-describe('EventController에 사용되는 유틸함수 테스트', () => {
+const mockOrder = [
+  { name: '해산물파스타', quantity: '2' },
+  { name: '레드와인', quantity: '1' },
+  { name: '초코케이크', quantity: '1' },
+];
+
+const setController = ({ date = 0, amount = 0, menus = [] }) => {
+  const model = new EventModel();
+  model.menus = menus;
+  model.date = date;
+  model.amount = amount;
+  const controller = new EventController(model);
+
+  return controller;
+};
+
+describe('EventController클래스 단위 테스트', () => {
   test('할인 전 총 주문 금액을 계산하는 기능 테스트', () => {
     //given
-    const mockMenus = [
-      { name: '해산물파스타', quantity: '2' },
-      { name: '레드와인', quantity: '1' },
-      { name: '초코케이크', quantity: '1' },
-    ];
+    const controller = setController({ menus: mockOrder });
 
     //when
-    const result =
-      controllerUtills.calculateTotalAmountBeforeDiscount(mockMenus);
+    const result = controller.calculateTotalAmountBeforeDiscount();
 
     //then
     expect(result).toEqual(145000);
@@ -26,7 +38,8 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
 
     mockAmount.forEach((amount, idx) => {
       //when
-      const result = controllerUtills.checkGiveawayEvent(amount);
+      const controller = setController({ amount: amount });
+      const result = controller.checkGiveawayEvent();
       //then
       expect(result).toEqual(expectResult[idx]);
     });
@@ -39,7 +52,8 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
 
     mockDate.forEach((date, idx) => {
       //when
-      const result = controllerUtills.checkChirsmasDdayEvent(date);
+      const controller = setController({ date: date });
+      const result = controller.checkChirsmasDdayEvent();
       //then
       expect(result).toEqual(expectResult[idx]);
     });
@@ -48,13 +62,11 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
   test('평일이벤트 할인 내역을 반환하는 기능 테스트', () => {
     //given
     const expectResult = 2023;
+    const date = 25;
+    const controller = setController({ date: date, menus: mockOrder });
 
     //when
-    const result = controllerUtills.checkWeekdayDiscountEvent(25, [
-      { name: '해산물파스타', quantity: '2' },
-      { name: '레드와인', quantity: '1' },
-      { name: '초코케이크', quantity: '1' },
-    ]);
+    const result = controller.checkWeekdayDiscountEvent();
 
     //then
     expect(result).toEqual(expectResult);
@@ -63,13 +75,10 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
   test('주말이벤트 할인 내역을 반환하는 기능 테스트', () => {
     //given
     const expectResult = 4046;
-
+    const date = 15;
+    const controller = setController({ date: date, menus: mockOrder });
     //when
-    const result = controllerUtills.checkWeekendDiscountEvent(15, [
-      { name: '해산물파스타', quantity: '2' },
-      { name: '레드와인', quantity: '1' },
-      { name: '초코케이크', quantity: '1' },
-    ]);
+    const result = controller.checkWeekendDiscountEvent();
 
     //then
     expect(result).toEqual(expectResult);
@@ -82,7 +91,8 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
 
     mockDate.forEach((date, idx) => {
       //when
-      const result = controllerUtills.checkSpecialDiscountEvent(date);
+      const controller = setController({ date: date });
+      const result = controller.checkSpecialDiscountEvent(date);
 
       //then
       expect(result).toEqual(expectResult[idx]);
@@ -91,6 +101,13 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
 
   test('할인 혜택 총 금액을 계산해주는 기능 테스트', () => {
     //given
+    const mocnkMenus = [
+      { name: '티본스테이크', quantity: '1' },
+      { name: '바비큐립', quantity: '1' },
+      { name: '초코케이크', quantity: '2' },
+      { name: '제로콜라', quantity: '1' },
+    ];
+
     const expectResult = [
       ['크리스마스 디데이 할인', 1200],
       ['평일 할인', 4046],
@@ -98,13 +115,12 @@ describe('EventController에 사용되는 유틸함수 테스트', () => {
       ['특별 할인', 1000],
       ['증정 이벤트', 25000],
     ];
-
-    const result = controllerUtills.calculateBenefitAmountList(142000, 3, [
-      { name: '티본스테이크', quantity: '1' },
-      { name: '바비큐립', quantity: '1' },
-      { name: '초코케이크', quantity: '2' },
-      { name: '제로콜라', quantity: '1' },
-    ]);
+    const controller = setController({
+      date: 3,
+      amount: 142000,
+      menus: mocnkMenus,
+    });
+    const result = controller.calculateBenefitAmountList();
 
     expect(result).toEqual(expectResult);
   });

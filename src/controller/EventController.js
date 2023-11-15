@@ -130,10 +130,9 @@ class EventController {
       return STATUS.NON_APPLICABLE_AMOUNT;
     }
 
-    const discountAmount = this.calculateDayEventDiscountAmount(
-      this.#model.menus,
-      [...CATEGORY_OF_MENUS.DESSERT]
-    );
+    const discountAmount = this.calculateDayEventDiscountAmount([
+      ...CATEGORY_OF_MENUS.DESSERT,
+    ]);
 
     return discountAmount;
   }
@@ -143,10 +142,9 @@ class EventController {
       return STATUS.NON_APPLICABLE_AMOUNT;
     }
 
-    const discountAmount = this.calculateDayEventDiscountAmount(
-      this.#model.menus,
-      [...CATEGORY_OF_MENUS.MAIN]
-    );
+    const discountAmount = this.calculateDayEventDiscountAmount([
+      ...CATEGORY_OF_MENUS.MAIN,
+    ]);
 
     return discountAmount;
   }
@@ -168,7 +166,6 @@ class EventController {
       }
       return amount;
     }, 0);
-
     return discountAmount;
   }
 }
